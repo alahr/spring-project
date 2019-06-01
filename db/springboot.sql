@@ -10,10 +10,29 @@ Target Server Type    : MYSQL
 Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2019-05-12 22:46:37
+Date: 2019-06-01 10:06:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for animal
+-- ----------------------------
+DROP TABLE IF EXISTS `animal`;
+CREATE TABLE `animal` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `name` varchar(50) DEFAULT NULL COMMENT '姓名',
+  `type` varchar(50) DEFAULT NULL COMMENT '宠物类型',
+  `birthday` date DEFAULT NULL COMMENT '出生日期',
+  `gender` char(1) DEFAULT NULL COMMENT '性别，1：男；2：女',
+  `owner` varchar(200) DEFAULT NULL COMMENT '主人',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of animal
+-- ----------------------------
+INSERT INTO `animal` VALUES ('1', 'Tom', 'Cat', '2019-03-20', '1', 'Dav');
 
 -- ----------------------------
 -- Table structure for person
@@ -28,7 +47,7 @@ CREATE TABLE `person` (
   `address` varchar(200) DEFAULT NULL COMMENT '住址',
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_person_card` (`card`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of person
