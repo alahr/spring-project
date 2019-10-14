@@ -3,10 +3,15 @@ package com.alahr.springproject.mybatis.service.impl;
 import com.alahr.springproject.mybatis.dao.PersonMapper;
 import com.alahr.springproject.mybatis.dto.PersonDTO;
 import com.alahr.springproject.mybatis.service.PersonService;
+import com.alahr.springproject.mybatis.vo.PersonVo;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
+
+import java.util.List;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -16,6 +21,13 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public PersonDTO getByCard(String card) {
         return personMapper.getByCard(card);
+    }
+
+    public PageInfo<PersonDTO> selectByPage(PersonVo vo){
+        PageHelper.startPage(vo.getPageNum(), vo.getPageSize());
+        List<PersonDTO> list = personMapper.selectByCondition(vo);
+        PageInfo<PersonDTO> pageInfo = new PageInfo<>(list);
+        return pageInfo;
     }
 
     @Override

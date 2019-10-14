@@ -9,9 +9,34 @@
         <result property="gender" column="gender" jdbcType="VARCHAR" javaType="String" />
         <result property="address" column="address" jdbcType="VARCHAR" javaType="String" />
     </resultMap>
+    <sql id="Base_Column_List">
+      id, card, `name`, birthday, gender, address
+    </sql>
+    <select id="selectByCondition" resultMap="PersonMap" parameterType="java.lang.Long">
+        select
+          <include refid="Base_Column_List"/>
+        from person
+        <where>
+            <if test="card != null">
+                card = #{card}
+            </if>
+            <if test="name != null">
+                and `name` = #{name}
+            </if>
+            <if test="birthdayStart != null">
+                and birthday &gt;= #{birthdayStart}
+            </if>
+            <if test="birthdayEnd != null">
+                and birthday &lt;= #{birthdayEnd}
+            </if>
+            <if test="gender != null">
+                and gender = #{gender}
+            </if>
+        </where>
+    </select>
     <select id="getByCard" resultMap="PersonMap" parameterType="java.lang.Long">
         select
-          id, card, `name`, birthday, gender, address
+          <include refid="Base_Column_List"/>
         from person
         <where>
             card = #{card}
