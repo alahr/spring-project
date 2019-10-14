@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2019-06-01 10:06:32
+Date: 2019-10-14 08:48:25
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -40,7 +40,7 @@ INSERT INTO `animal` VALUES ('1', 'Tom', 'Cat', '2019-03-20', '1', 'Dav');
 DROP TABLE IF EXISTS `person`;
 CREATE TABLE `person` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `card` varchar(20) NOT NULL,
+  `card` varchar(20) NOT NULL COMMENT '身份证号',
   `name` varchar(50) DEFAULT NULL COMMENT '姓名',
   `birthday` date DEFAULT NULL COMMENT '出生日期',
   `gender` char(1) DEFAULT NULL COMMENT '性别，1：男；2：女',
