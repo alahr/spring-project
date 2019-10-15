@@ -11,4 +11,6 @@ public interface WaybillEsService {
 
     List<WaybillEsDO> queryByWaybillNo(List<String> waybillNoList);
 
+    boolean save(WaybillEsDO entity);
+
 }

@@ -7,8 +7,7 @@ import com.alahr.springproject.jest.param.WaybillEsParam;
 import com.alahr.springproject.jest.service.WaybillEsService;
 import com.alahr.springproject.jest.util.JestClientUtil;
 import io.searchbox.client.JestClient;
-import io.searchbox.core.Search;
-import io.searchbox.core.SearchResult;
+import io.searchbox.core.*;
 import io.searchbox.strings.StringUtils;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -110,5 +109,24 @@ public class WaybillEsServiceImpl implements WaybillEsService {
             return Collections.EMPTY_LIST;
         }
 
+    }
+
+    @Override
+    public boolean save(WaybillEsDO entity) {
+        JestClient jestClient = JestClientUtil.getClient(esUrl);
+
+        Bulk.Builder bulk = new Bulk.Builder();
+        Index index = new Index.Builder(entity).index(EsConstant.INDEX_WAYBILL).type(EsConstant.TYPE_WAYBILL).build();
+        bulk.addAction(index);
+        try {
+            BulkResult dr = jestClient.execute(bulk.build());
+            if(dr.isSucceeded()){
+                return true;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return false;
     }
 }
