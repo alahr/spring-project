@@ -1,7 +1,17 @@
-# Spring boot
+# 框架
 ## mysql、page helper
-详细配置信息见application*文件中
+spring boot + mybatis + mysql
+
 
 # 功能
-## person
+## 人员信息
 人员信息的分页查询，添加，修改和删除
+## example
+localhost:8080/person/page
+Post:
+{
+	"pageSize":3,
+	"pageNum":1,
+	"gender":"1",
+	"card":"1001"
+}
